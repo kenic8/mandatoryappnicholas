@@ -8,8 +8,9 @@ function Recipe(props) {
   } else return (
     <>
       <h3>Recipe: {recipe.title}</h3>
-
-      <p>{recipe.description}</p>
+      <p>{recipe.desc}</p>
+      <p>{recipe.ingredients}</p>
+      <h2>{recipe.time > 25 ? "Hard" : "Easy"}</h2>
     </>
   );
 }
