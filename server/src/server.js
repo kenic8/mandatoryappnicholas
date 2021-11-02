@@ -8,6 +8,7 @@ import cors from "cors";
 
 /* Local files */
 import recipeRoutes from "./routes/recipes.js";
+import quoteRoutes from "./routes/quotes.js";
 
 function createServer() {
   const app = express();
@@ -34,7 +35,8 @@ function createServer() {
   app.use(express.static(path.resolve("..", "client", "build")));
 
   /* We add our own routes as middleware on the `/api` path */
-  app.use("/api/recipes", recipeRoutes);
+  // app.use("/api/recipes", recipeRoutes);
+  app.use("/api/quotes",quoteRoutes)
 
   /* "Redirect" all non-API GET requests to React's entry point (index.html)
    * which allows the React SPA's client side navigation library to handle full
