@@ -1,32 +1,27 @@
 import { useState } from 'react';
 
 function AddLike(props) {
-   const [likeView, setislikeView] = useState(props.likes);
-   const [isliked, setisliked] = useState(Boolean);
+   let [likeView, setlikeView] = useState(props.likes);
+   const [isliked, setisliked] = useState(false);
   console.log(props.likes)
   let parsed = parseInt(props.likes)
-
-  console.log(isliked)
   return (
     <>
-
-     <label>likes</label>
+      <label>likes</label>
       <button
         type="button"
         onClick={(e) => {
-          setisliked(false)
           if (isliked !== true) {
-            setisliked(true)
-            props.addLike(parsed++, props._id);
-            console.log(parsed)
-            setislikeView(parsed)
-            return isliked
+            setlikeView(parsed+1);
+            props.addLike(parsed+1, props._id);
+            console.log(likeView);
+            setisliked(true);
           } else {
-            props.addLike(parsed--, props._id);
-            console.log(parsed)
-            setislikeView(parsed)
-            setisliked(false)
-            return isliked
+            return
+            // props.addLike(parsed--, props._id);
+            // setlikeView(parsed--);
+            // console.log(parsed);
+            // setisliked(false);
           }
         }}
       >
