@@ -12,16 +12,17 @@ function AddComment(props) {
   // Conditional rendering
   return (
     <>
-      <h3>Add comment</h3>
-      <form>
+      <h1>Add comment</h1>
+      <form className ="info">
         <label>description</label>
         <input
           onChange={(event) => setcontent(event.target.value)}
           type="text"
           value={content}
         />
-      </form>
+      
       <button
+       className="button-form"
         type="button"
         onClick={(e) => {
           e.preventDefault();
@@ -31,6 +32,7 @@ function AddComment(props) {
       >
         Add comment
       </button>
+      </form>
     </>
   );
 }

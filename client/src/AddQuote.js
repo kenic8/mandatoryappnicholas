@@ -15,17 +15,18 @@ function AddQuote(props) {
   return (
     <>
       <h3>Add quote</h3>
-      <form>
+      <form className ="info">
         <label>Title</label>
         <input onChange={(event) => setTitle(event.target.value)} type="text" value={title} />
         <label>description</label>
         <input
           onChange={(event) => setDescription(event.target.value)}
-          type="text"
+          type="textarea"
           value={description}
         />
-      </form>
+      
       <button
+      className="button-form"
         type="button"
         onClick={(e) => {
           Addquote(title, description);
@@ -34,6 +35,7 @@ function AddQuote(props) {
       >
         Add Quote
       </button>
+      </form>
     </>
   );
 }

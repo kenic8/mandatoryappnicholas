@@ -7,7 +7,7 @@ function AddLike(props) {
   let parsed = parseInt(props.likes)
   return (
     <>
-      <label>likes</label>
+      <label>Click me to like - </label>
       <button
         type="button"
         onClick={(e) => {

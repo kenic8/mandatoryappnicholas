@@ -11,22 +11,24 @@ function Quote(props) {
   } else
     return (
       <>
-        <h3>quote: {quote.title}</h3>
-        <p>{quote.description}</p>
-        <p>{quote.description}</p>
-
-        <AddComment addComment={props.addComment} _id={_id}></AddComment>
+        <h1>this is a Quote about: {quote.title}</h1>
+        <h2>{quote.description}</h2>
         <AddLike _id={_id} addLike={props.addLike} likes={quote.likes}></AddLike>
-
-        <h3>comments </h3>
-        <ul>
+        <hr></hr>
+        <AddComment addComment={props.addComment} _id={_id}></AddComment>
+        <h1>comments </h1>
+        <div className="comment-wrap">
           {quote.comments.map((comment, index) => (
-            <li key={index}>
+            <div className="comment-wrap-inner-2" key={index}>
               <p>{comment.content}</p>
               <p>{comment.time}</p>
-            </li>
+              <hr></hr>
+            </div>
+           
+          
           ))}
-        </ul>
+          
+        </div>
       </>
     );
 }

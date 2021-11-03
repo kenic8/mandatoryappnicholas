@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Router } from "@reach/router";
 import Quotes from "./Quotes";
 import Quote from "./Quote";
+import './App.css'
 // import AddRecipe from "./AddRecipe";
 const API_URL = process.env.REACT_APP_API;
 
@@ -149,7 +150,6 @@ function App() {
     //     <AddRecipe addRecipe={addRecipe}></AddRecipe>
     //   </>
     <>
-    <h1>We like quotes!</h1>
       <Router>
         {/* Routes for comps */}
         <Quotes path="/" data={data} addQuoteFunc={addQuoteFunc}></Quotes>

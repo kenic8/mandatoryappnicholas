@@ -1,31 +1,40 @@
 import React from "react";
 import { Link } from "@reach/router";
 import AddQuote from "./AddQuote";
-
+import img from "./img/anno.png"
 
 // Nothing special happens in this component, except for the Link
-
 
 function Quotes(props) {
   let Quotes = props.data;
   return (
-    <div>
-      <h1>list of Quotes</h1>
-      <ul>
+    <>
+    <h1>anonymous quotes</h1>
+    <AddQuote Addquote={props.addQuoteFunc}></AddQuote>
+    
         {Quotes.map((quote, index) => (
-          <li key={index}>
-            <Link key={index} to={`/Quote/${quote._id}`}>
-              {quote.title}
-            </Link>
-          </li>
+          <div className="comment-wrap">
+            <div className="comment-wrap-inner-1">
+              <img id="comImg" src={img}></img>
+            </div>
+            <div className="comment-wrap-inner-2" key={index}>
+              <Link key={index} to={`/Quote/${quote._id}`}>
+                <h3>{quote.title}</h3>
+              </Link>
+              <h4>A post about</h4>
+              <h3>{quote.description}</h3>
+              <Link key={index} to={`/Quote/${quote._id}`}>
+              <button className="btn-go">Go to post</button>
+              </Link>
+            </div>
+         </div>
         ))}
-      </ul>
-
-      <h1> End of list of quotes</h1>
-      <AddQuote  Addquote={props.addQuoteFunc}></AddQuote>
+    
+      
+     
 
       <Link to="/">Go back</Link>
-    </div>
+    </>
   );
 }
 
