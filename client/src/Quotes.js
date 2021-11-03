@@ -8,11 +8,9 @@ import AddQuote from "./AddQuote";
 
 function Quotes(props) {
   let Quotes = props.data;
-  console.log(Quotes);
   return (
     <div>
       <h1>list of Quotes</h1>
-      {console.log(Quotes)}
       <ul>
         {Quotes.map((quote, index) => (
           <li key={index}>

@@ -5,25 +5,31 @@ function AddComment(props) {
   console.log(props);
   const [content, setcontent] = useState("");
 
+  const resetInputField = () => {
+    setcontent("");
+  };
+
   // Conditional rendering
   return (
     <>
       <h3>Add comment</h3>
       <form>
-    
         <label>description</label>
         <input
           onChange={(event) => setcontent(event.target.value)}
           type="text"
+          value={content}
         />
       </form>
       <button
         type="button"
         onClick={(e) => {
-          props.addComment(content,props._id);
+          e.preventDefault();
+          props.addComment(content, props._id);
+          resetInputField();
         }}
       >
-        Add Quote
+        Add comment
       </button>
     </>
   );

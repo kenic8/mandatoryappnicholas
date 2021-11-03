@@ -1,14 +1,12 @@
 import { useState } from 'react';
 
-function AddComment(props) {
-  // const { Addcomment } = props;
-  console.log(props);
-  const [likes, setlikes] = useState(props.liked);
-  const [isliked, setisliked] = useState(props.isliked);
-  let addedlike = parseInt(props.likes) + 1;
-  const [content, setcontent] = useState("");
+function AddLike(props) {
+   const [likeView, setislikeView] = useState(props.likes);
+   const [isliked, setisliked] = useState(Boolean);
+  console.log(props.likes)
+  let parsed = parseInt(props.likes)
 
-  // Conditional rendering
+  console.log(isliked)
   return (
     <>
 
@@ -16,19 +14,26 @@ function AddComment(props) {
       <button
         type="button"
         onClick={(e) => {
+          setisliked(false)
           if (isliked !== true) {
-            setlikes(addedlike);
-            setisliked(true);
+            setisliked(true)
+            props.addLike(parsed++, props._id);
+            console.log(parsed)
+            setislikeView(parsed)
+            return isliked
           } else {
-            setisliked(false);
+            props.addLike(parsed--, props._id);
+            console.log(parsed)
+            setislikeView(parsed)
+            setisliked(false)
+            return isliked
           }
-          props.Addlikes(likes, props._id);
         }}
       >
-        {props.likes}
+        {likeView}
       </button>
     </>
   );
 }
 
-export default AddComment;
+export default AddLike;

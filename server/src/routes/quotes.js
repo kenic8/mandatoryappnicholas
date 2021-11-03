@@ -6,8 +6,8 @@ const quoteRoutes = express.Router();
 quoteRoutes.get("/", async (req, res) => {
   const quotes = await Quote.find();
   res.json(quotes);
-  console.log(res);
-  console.log("hej")
+  // console.log(res);
+  // console.log("hej")
 });
 
 ////update record with request body from fetch --> 
@@ -46,13 +46,40 @@ quoteRoutes.post("/", async (req, res) => {
 quoteRoutes.post("/:id", async (req, res) => {
   try {
     console.log("inpost");
-    const filter = { _id: req.body._id };
-    const update = { $push: { comments: req.body } };
+    const filter = { _id: req.params.id };
+    const update = {
+      $push: {
+        comments: {
+          content: req.body.content,
+          time: req.body.time,
+          commentId: req.body.commentId,
+        }
+      },
+    };
     console.log(req.body);
     let doc = await Quote.findOneAndUpdate(filter, update, {
       new: true,
     });
     res.json(doc);
+  } catch (error) {
+    res.status(500);
+    res.json({ error: "Something went wrong", details: error.toString() });
+    console.log(error);
+  }
+});
+
+
+
+quoteRoutes.post("/like/:id", async (req, res) => {
+  try {
+    console.log("inpost");
+    const filter = { _id: req.body._id };
+    const update = { likes: req.body.likes };
+    let doc = await Quote.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    res.json(doc);
+    console.log(doc)
   } catch (error) {
     res.status(500);
     res.json({ error: "Something went wrong", details: error.toString() });

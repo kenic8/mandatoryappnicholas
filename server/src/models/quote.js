@@ -6,18 +6,17 @@ const quoteSchema = new mongoose.Schema({
     required: true,
   },
   description: String,
+  likes: { type: String, default: "0" },
+  
   comments: [
     {
       time: {
         type: String,
       },
-      commentId:String,
+      commentId: String,
       content: { type: String },
     },
   ],
-  likes: {
-    default: 0,
-  },
 });
 
 const Quote = mongoose.model("Quote", quoteSchema);
