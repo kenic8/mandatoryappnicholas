@@ -4,11 +4,26 @@ import Quote from "../models/quote.js";
 const quoteRoutes = express.Router();
 
 quoteRoutes.get("/", async (req, res) => {
-  const quotes = await Quote.find();
+  const quotes =  await Quote.find({}).sort({date: 'desc'});
   res.json(quotes);
   // console.log(res);
   // console.log("hej")
 });
+
+  // quoteRoutes.get("/", async (req, res) => {
+  //   try{
+  //     await Quote.find({}).sort({date: 'desc'}).exec((err, res) => { 
+  //       res.json(res);
+  //     });
+  //     res.status(201);
+  //   }catch(error){
+  //     res.status(404);
+  //     res.json({
+  //       error: "quote could not be found",
+  //       details: error.toString(),
+  //     });
+  
+  //   }
 
 ////update record with request body from fetch --> 
 quoteRoutes.post("/", async (req, res) => {

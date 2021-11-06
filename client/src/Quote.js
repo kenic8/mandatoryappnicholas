@@ -11,8 +11,9 @@ function Quote(props) {
   } else
     return (
       <>
-        <h1>this is a Quote about: {quote.title}</h1>
-        <h2>{quote.description}</h2>
+        <h1>Welcome to:  {quote.title}</h1>
+        <h2>By: {quote.author}</h2>
+        <h3> About: {quote.description}</h3>
         <AddLike _id={_id} addLike={props.addLike} likes={quote.likes}></AddLike>
         <hr></hr>
         <AddComment addComment={props.addComment} _id={_id}></AddComment>

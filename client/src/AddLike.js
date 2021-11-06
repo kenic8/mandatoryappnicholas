@@ -1,23 +1,63 @@
-import { useState } from 'react';
+import { useState } from "react";
+import like from "./img/like.png";
+import unlike from "./img/unlike.png";
 
 function AddLike(props) {
-   let [likeView, setlikeView] = useState(props.likes);
-   const [isliked, setisliked] = useState(false);
-  console.log(props.likes)
-  let parsed = parseInt(props.likes)
+  let [likeView, setlikeView] = useState(props.likes);
+  const [isliked, setisliked] = useState(false);
+  const [isunliked, setisunliked] = useState(false);
+  console.log(props.likes);
+  let parsed = parseInt(props.likes);
   return (
     <>
       <label>Click me to like - </label>
+
+      <div class="flex-container-likes">
+        <div>
+          <img
+            src={like}
+            alt="like"
+            onClick={(e) => {
+              if (isliked !== true) {
+                setlikeView(parsed + 1);
+                props.addLike(parsed + 1, props._id);
+                console.log(likeView);
+                setisliked(true);
+              } else {
+                return;
+              }
+            }}
+          />
+        </div>
+        <div>{likeView}</div>
+        <div>
+          <img
+            alt="Unlike"
+            src={unlike}
+            onClick={(e) => {
+              if (isunliked !== true) {
+                setlikeView(parsed - 1);
+                props.addLike(parsed - 1, props._id);
+                console.log(likeView);
+                setisunliked(true);
+              } else {
+                return;
+              }
+            }}
+          />
+        </div>
+      </div>
+{/* 
       <button
         type="button"
         onClick={(e) => {
           if (isliked !== true) {
-            setlikeView(parsed+1);
-            props.addLike(parsed+1, props._id);
+            setlikeView(parsed + 1);
+            props.addLike(parsed + 1, props._id);
             console.log(likeView);
             setisliked(true);
           } else {
-            return
+            return;
             // props.addLike(parsed--, props._id);
             // setlikeView(parsed--);
             // console.log(parsed);
@@ -26,7 +66,7 @@ function AddLike(props) {
         }}
       >
         {likeView}
-      </button>
+      </button> */}
     </>
   );
 }

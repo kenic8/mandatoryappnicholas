@@ -2,8 +2,8 @@ import { useState } from "react";
 
 function AddQuote(props) {
   const { Addquote } = props;
-  console.log(props);
   const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
 
   const resetInputField = () => {
@@ -18,10 +18,12 @@ function AddQuote(props) {
       <form className ="info">
         <label>Title</label>
         <input onChange={(event) => setTitle(event.target.value)} type="text" value={title} />
+        <label>author</label>
+        <input onChange={(event) => setAuthor(event.target.value)} type="text" value={author}/>
         <label>description</label>
-        <input
+        <textarea
           onChange={(event) => setDescription(event.target.value)}
-          type="textarea"
+          type="text"
           value={description}
         />
       
@@ -29,7 +31,7 @@ function AddQuote(props) {
       className="button-form"
         type="button"
         onClick={(e) => {
-          Addquote(title, description);
+          Addquote(title, description,author);
           resetInputField();
         }}
       >

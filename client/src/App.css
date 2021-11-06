@@ -6,6 +6,7 @@ font-family: monospace;
 
 .comment-wrap{
     width: 600px;
+    height: 200px;
     display: flex;
     flex-wrap: wrap;
     background-color: whitesmoke;
@@ -39,14 +40,11 @@ font-family: monospace;
 
 .btn-go {
 	box-shadow: 0px 1px 0px 0px #f0f7fa;
-	background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
-	background-color:#33bdef;
-	border-radius:6px;
+	background-color:#1c87c9;
 	border:1px solid #057fd0;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
 	padding:6px 24px;
@@ -63,8 +61,7 @@ font-family: monospace;
 }
 
 #comImg{
-    width: 100%;
-    margin-top: 30%
+    width: 80%;
 }
 
 
@@ -98,3 +95,36 @@ form {
             .button-form:hover {
                 background: #019ad2;
                 }    
+
+
+
+                .flex-container-likes {
+                    background-color: whitesmoke;
+                    margin-top: 2%;
+                    display: flex;
+                    flex-wrap: nowrap;
+                    width:20%;
+                    align-items: center;
+                    justify-content: center;
+                  }
+                  
+                  .flex-container-likes > div {
+                     padding: 0;
+                    transition: transform 2s; /* Animation */
+                    background-color: whitesmoke;
+                    width: 20%;
+                    margin-right: 0%;
+                    text-align: center;
+                    font-size: 1.5em;
+                  }
+                
+                
+                  
+                  .flex-container-likes > div > img {
+                width: 50%;
+              
+                  }
+
+                  .flex-container-likes > div > img:hover{
+                    transform: scale(1.5);
+                  }

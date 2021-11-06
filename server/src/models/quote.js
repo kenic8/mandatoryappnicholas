@@ -5,9 +5,19 @@ const quoteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: String,
+  author: {
+    type: String,
+  },
+  date: { type: Date, default: Date.now },
+  description: {
+    type: String,
+    maxLength: 300,
+    required: true,
+    
+  },
+
   likes: { type: String, default: "0" },
-  
+
   comments: [
     {
       time: {

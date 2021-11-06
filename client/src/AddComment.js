@@ -15,7 +15,7 @@ function AddComment(props) {
       <h1>Add comment</h1>
       <form className ="info">
         <label>description</label>
-        <input
+        <textarea
           onChange={(event) => setcontent(event.target.value)}
           type="text"
           value={content}

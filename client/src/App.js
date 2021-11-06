@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Router } from "@reach/router";
 import Quotes from "./Quotes";
 import Quote from "./Quote";
+
 import './App.css'
 // import AddRecipe from "./AddRecipe";
 const API_URL = process.env.REACT_APP_API;
@@ -47,29 +48,68 @@ function App() {
     
   // }
 
-  function addQuoteFunc(title, description) {
-    console.log(title, description);
-    const data = { 
-      title: title, 
-      description: description
+  function addQuoteFunc(title, description,author) {
+    console.log(title, description + author);
+    if (author ==="") {
+      let arrNmes = [
+        "prairie dog",
+        "coati",
+        "turtle",
+        "parakeet",
+        "ox",
+        "aardvark",
+        "otter",
+        "wolverine",
+        "crocodile",
+        "thorny devil",
+        "opossum",
+      ];
+      let randomNr = Math.floor(Math.random() * 11);
+      let author = "Anonymous " + arrNmes[randomNr];
+      author.toString();
+      const data = {
+        title: title,
+        description: description,
+        author: author,
+      };
+      const postData = async () => {
+        ///need new route
+        const url = `${API_URL}/quotes`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        console.table(data);
+        console.table(response);
+      };
+      postData();
+      getData();
+    } else{
+    const data = {
+      title: title,
+      description: description,
+      author: author,
     };
     const postData = async () => {
       ///need new route
       const url = `${API_URL}/quotes`;
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-      console.table(data)
-      console.table(response)
-    }; 
+      console.table(data);
+      console.table(response);
+    };
     postData();
     getData();
-    
   }
+}
 
   function addComment(content, _id) {
     let today = new Date();
