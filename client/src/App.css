@@ -12,7 +12,7 @@ h2{
 }
 
 .comment-wrap{
-    width: 600px;
+    width: 800px;
     height: 200px;
     display: flex;
     flex-wrap: wrap;
@@ -39,7 +39,7 @@ h2{
 }
 
 .comment-wrap > .comment-wrap-inner-2 > h3{
-  font-size: 1.5em;
+  font-size: 1em;
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
