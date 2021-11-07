@@ -14,7 +14,9 @@ quoteRoutes.post("/", async (req, res) => {
   try {
     const quote = await Quote.create(req.body);
     res.status(201);
-    res.json(quote);
+    //fetch newest
+    const quotes =  await Quote.find({}).sort({date: 'desc'});
+    res.json(quotes);
   } catch (error) {
     res.status(500);
     res.json({
@@ -41,7 +43,8 @@ quoteRoutes.post("/:id", async (req, res) => {
     let doc = await Quote.findOneAndUpdate(filter, update, {
       new: true,
     });
-    res.json(doc);
+    const quotes =  await Quote.find({}).sort({date: 'desc'});
+    res.json(quotes);
   } catch (error) {
     res.status(500);
     res.json({ error: "Something went wrong", details: error.toString() });
@@ -59,8 +62,8 @@ quoteRoutes.post("/like/:id", async (req, res) => {
     let doc = await Quote.findOneAndUpdate(filter, update, {
       new: true,
     });
-    res.json(doc);
-    console.log(doc)
+    const quotes =  await Quote.find({}).sort({date: 'desc'});
+    res.json(quotes);
   } catch (error) {
     res.status(500);
     res.json({ error: "Something went wrong", details: error.toString() });
