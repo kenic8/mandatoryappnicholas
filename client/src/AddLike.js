@@ -3,7 +3,6 @@ import like from "./img/like.png";
 import unlike from "./img/unlike.png";
 
 function AddLike(props) {
-  let [likeView, setlikeView] = useState(props.likes);
   const [isliked, setisliked] = useState(false);
   const [isunliked, setisunliked] = useState(false);
   console.log(props.likes);
@@ -19,27 +18,25 @@ function AddLike(props) {
             alt="like"
             onClick={(e) => {
               if (isliked !== true) {
-                setlikeView(parsed + 1);
-                props.addLike(parsed + 1, props._id);
-                console.log(likeView);
+                props.addLike(parsed + 1, props._id)
                 setisliked(true);
+                setisunliked(false);
               } else {
                 return;
               }
             }}
           />
         </div>
-        <div>{likeView}</div>
+        <div>{props.likes}</div>
         <div>
           <img
             alt="Unlike"
             src={unlike}
             onClick={(e) => {
               if (isunliked !== true) {
-                setlikeView(parsed - 1);
                 props.addLike(parsed - 1, props._id);
-                console.log(likeView);
                 setisunliked(true);
+                setisliked(false);
               } else {
                 return;
               }
@@ -47,26 +44,6 @@ function AddLike(props) {
           />
         </div>
       </div>
-{/* 
-      <button
-        type="button"
-        onClick={(e) => {
-          if (isliked !== true) {
-            setlikeView(parsed + 1);
-            props.addLike(parsed + 1, props._id);
-            console.log(likeView);
-            setisliked(true);
-          } else {
-            return;
-            // props.addLike(parsed--, props._id);
-            // setlikeView(parsed--);
-            // console.log(parsed);
-            // setisliked(false);
-          }
-        }}
-      >
-        {likeView}
-      </button> */}
     </>
   );
 }

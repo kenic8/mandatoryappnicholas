@@ -6,26 +6,10 @@ const quoteRoutes = express.Router();
 quoteRoutes.get("/", async (req, res) => {
   const quotes =  await Quote.find({}).sort({date: 'desc'});
   res.json(quotes);
-  // console.log(res);
-  // console.log("hej")
+
 });
 
-  // quoteRoutes.get("/", async (req, res) => {
-  //   try{
-  //     await Quote.find({}).sort({date: 'desc'}).exec((err, res) => { 
-  //       res.json(res);
-  //     });
-  //     res.status(201);
-  //   }catch(error){
-  //     res.status(404);
-  //     res.json({
-  //       error: "quote could not be found",
-  //       details: error.toString(),
-  //     });
-  
-  //   }
 
-////update record with request body from fetch --> 
 quoteRoutes.post("/", async (req, res) => {
   try {
     const quote = await Quote.create(req.body);
@@ -39,24 +23,6 @@ quoteRoutes.post("/", async (req, res) => {
     });
   }
 });
-
-
-// quoteRoutes.get("/:id", async (req, res) => {
-//   try {
-//     const quote = await Quote.findById(req.params.id);
-//     if (quote) {
-//       res.json(quote);
-//     } else {
-//       res.status(404);
-//       res.json({ error: "quote not found" });
-//     }
-//   } catch (error) {
-//     res.status(500);
-//     res.json({ error: "Something went wrong", details: error.toString() });
-//   }
-// });
-
-
 
 quoteRoutes.post("/:id", async (req, res) => {
   try {

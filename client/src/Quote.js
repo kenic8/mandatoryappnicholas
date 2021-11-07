@@ -1,5 +1,6 @@
 import AddComment from "./AddComment";
 import AddLike from "./AddLike";
+import { Link } from "@reach/router";
 
 function Quote(props) {
   const { _id, getQuote } = props;
@@ -13,7 +14,7 @@ function Quote(props) {
       <>
         <h1>Welcome to:  {quote.title}</h1>
         <h2>By: {quote.author}</h2>
-        <h3> About: {quote.description}</h3>
+        <h2> About: {quote.description}</h2>
         <AddLike _id={_id} addLike={props.addLike} likes={quote.likes}></AddLike>
         <hr></hr>
         <AddComment addComment={props.addComment} _id={_id}></AddComment>
@@ -30,6 +31,10 @@ function Quote(props) {
           ))}
           
         </div>
+        
+      <Link to="/">
+        <button className="btn-go-back">GO BACK</button>
+      </Link>
       </>
     );
 }
