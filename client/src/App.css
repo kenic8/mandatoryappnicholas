@@ -3,6 +3,7 @@ background-color: rgb(233, 233, 233);
 width: 100%;
 font-family: monospace;
 margin-left: 1%;
+overflow-x: hidden;
 }
 
 h2{
