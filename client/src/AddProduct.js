@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Link } from "@reach/router";
 
-function AddQuote(props) {
-  const { Addquote } = props;
+function AddProduct(props) {
+  const { addProduct } = props;
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
+  const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
 
   const resetInputField = () => {
@@ -14,12 +15,12 @@ function AddQuote(props) {
   // Conditional rendering
   return (
     <>
-      <h3>Add quote</h3>
+      <h3>Add product to your wishlist</h3>
       <form className ="info">
         <label>Title</label>
         <input onChange={(event) => setTitle(event.target.value)} type="text" value={title} />
-        <label>author</label>
-        <input onChange={(event) => setAuthor(event.target.value)} type="text" value={author}/>
+        <label>Link</label>
+        <input onChange={(event) => setLink(event.target.value)} type="text" value={link}/>
         <label>description</label>
         <textarea
           onChange={(event) => setDescription(event.target.value)}
@@ -31,15 +32,19 @@ function AddQuote(props) {
       className="button-form"
         type="button"
         onClick={(e) => {
-          Addquote(title, description,author);
+          addProduct(title, description,link);
           resetInputField();
         }}
       >
-        Add Quote
+        Add Wish
       </button>
       </form>
+
+      <Link to="/">
+        <button className="btn-go-back">go to wishList</button>
+      </Link>
     </>
   );
 }
 
-export default AddQuote;
+export default AddProduct;

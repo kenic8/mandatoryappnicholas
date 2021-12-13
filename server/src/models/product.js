@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
 
-const quoteSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  author: {
+  link: {
     type: String,
+  },
+  ///jwt auth user id key for lookup
+  creatorKey:{
+    type:String
   },
   date: { type: Date, default: Date.now },
   description: {
@@ -29,6 +33,6 @@ const quoteSchema = new mongoose.Schema({
   ],
 });
 
-const Quote = mongoose.model("Quote", quoteSchema);
+const Product = mongoose.model("Products", productSchema);
 
-export default Quote;
+export default Product;

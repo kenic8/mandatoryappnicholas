@@ -1,32 +1,32 @@
 import express from "express";
-import Quote from "../models/quote.js";
+import Product from "../models/Product.js";
 
-const quoteRoutes = express.Router();
+const productRoutes = express.Router();
 
-quoteRoutes.get("/", async (req, res) => {
-  const quotes =  await Quote.find({}).sort({date: 'desc'});
-  res.json(quotes);
+productRoutes.get("/", async (req, res) => {
+  const products =  await Product.find({}).sort({date: 'desc'});
+  res.json(products);
 
 });
 
 
-quoteRoutes.post("/", async (req, res) => {
+productRoutes.post("/", async (req, res) => {
   try {
-    const quote = await Quote.create(req.body);
+    const product = await Product.create(req.body);
     res.status(201);
     //fetch newest
-    const quotes =  await Quote.find({}).sort({date: 'desc'});
-    res.json(quotes);
+    const products =  await Product.find({}).sort({date: 'desc'});
+    res.json(products);
   } catch (error) {
     res.status(500);
     res.json({
-      error: "Recipe could not be created",
+      error: "wish could not be created",
       details: error.toString(),
     });
   }
 });
 
-quoteRoutes.post("/:id", async (req, res) => {
+productRoutes.post("/:id", async (req, res) => {
   try {
     console.log("inpost");
     const filter = { _id: req.params.id };
@@ -40,11 +40,12 @@ quoteRoutes.post("/:id", async (req, res) => {
       },
     };
     console.log(req.body);
-    let doc = await Quote.findOneAndUpdate(filter, update, {
+    let doc = await Product.findOneAndUpdate(filter, update, {
       new: true,
     });
-    const quotes =  await Quote.find({}).sort({date: 'desc'});
-    res.json(quotes);
+   // const products =  await Product.find({}).sort({date: 'desc'});
+    res.json(doc);
+
   } catch (error) {
     res.status(500);
     res.json({ error: "Something went wrong", details: error.toString() });
@@ -54,16 +55,16 @@ quoteRoutes.post("/:id", async (req, res) => {
 
 
 
-quoteRoutes.post("/like/:id", async (req, res) => {
+productRoutes.post("/like/:id", async (req, res) => {
   try {
     console.log("inpost");
     const filter = { _id: req.body._id };
     const update = { likes: req.body.likes };
-    let doc = await Quote.findOneAndUpdate(filter, update, {
+    let doc = await Product.findOneAndUpdate(filter, update, {
       new: true,
     });
-    const quotes =  await Quote.find({}).sort({date: 'desc'});
-    res.json(quotes);
+    //const products =  await Product.find({}).sort({date: 'desc'});
+    res.json(doc);
   } catch (error) {
     res.status(500);
     res.json({ error: "Something went wrong", details: error.toString() });
@@ -72,4 +73,4 @@ quoteRoutes.post("/like/:id", async (req, res) => {
 });
 
 
-export default quoteRoutes;
+export default productRoutes;
