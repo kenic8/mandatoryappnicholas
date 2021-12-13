@@ -14,6 +14,7 @@ function App() {
 //token
 
 function setToken(token) {
+  console.log(token + "hej");
   localStorage.setItem("token", token);
 }
 
@@ -23,7 +24,21 @@ function getToken() {
 
 function logout() {
   localStorage.removeItem("token");
+  localStorage.removeItem("user");
 }
+
+
+//currentuser
+
+function setUser(user) {
+  console.log(user + "hej");
+  localStorage.setItem("token", user);
+}
+
+function getUser() {
+  return localStorage.getItem("token");
+}
+
 
 
   ///counter 
@@ -110,7 +125,6 @@ function loginUser(email, password) {
     password: password,
   };
 
-console.log(data)
 
   const postData = async () => {
     ///need new route
@@ -121,23 +135,24 @@ console.log(data)
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+    
     });
-    if (response.ok){
+    const res = await response.json().then(response => {
+      console.log(response.token)
+      setToken(response.token)
+      //Current user
+      setUser(response.user)
+    
+    });
+    
+    }
      //const newToken =  response.header("logintoken")
      // setToken(newToken)
-      console.log(response.body.token)
-      setToken(response.body.token)
-
-    }
- 
-   // const dataNew = await response.json();
-    //setPostCount(postCount+1);
+     postData();
   };
-  ///Do somthing wih it
-  // Redirect to users wishlist 
-  postData();
+  
+  
 
-}
 
 
 

@@ -10,10 +10,8 @@ userRoutes.post("/", async (req, res) => {
   //Find user in users 
   console.log(req.body.email)
   const user = await User.findOne({ email: req.body.email });
-  
   if (!user) {
     return res.status(404).send("Email does not exist");
-  
     //passwordcheck
   // if (bcrypt.compareSync(password, user.hash)) {
   //   const payload = { username: username };
@@ -26,11 +24,11 @@ userRoutes.post("/", async (req, res) => {
     },
     process.env.TOKEN_S
   );
-
   res.json({
-    user:user,
-    token:token
+    user: user,
+    token: token.toString(),
   });
+  //res.json(user);
 });
 
 
