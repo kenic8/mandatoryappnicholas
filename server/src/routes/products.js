@@ -1,6 +1,7 @@
 import express from "express";
 import Product from "../models/Product.js";
-
+import jwt from "jsonwebtoken";
+import Validation from "./validation.js"
 const productRoutes = express.Router();
 
 productRoutes.get("/", async (req, res) => {
@@ -26,8 +27,18 @@ productRoutes.post("/", async (req, res) => {
   }
 });
 
+
 productRoutes.post("/:id", async (req, res) => {
+///check if token is send with 
+const token = req.headers.authorization
+  if (!token) {
+    return res.status(400).send('login to gain acesss')
+}
+  
   try {
+    const verify = jwt.verify(token,process.env.TOKEN_S)
+    console.log(verify)
+
     console.log("inpost");
     const filter = { _id: req.params.id };
     const update = {
@@ -44,11 +55,11 @@ productRoutes.post("/:id", async (req, res) => {
       new: true,
     });
    // const products =  await Product.find({}).sort({date: 'desc'});
-    res.json(doc);
+    res.json({ doc: doc, user: verify });
 
   } catch (error) {
     res.status(500);
-    res.json({ error: "Something went wrong", details: error.toString() });
+    res.json({ error: "Login to comment on post", details: error.toString() });
     console.log(error);
   }
 });

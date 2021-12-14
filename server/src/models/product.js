@@ -5,6 +5,9 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  owner:{
+    type:String
+  },
   link: {
     type: String,
   },

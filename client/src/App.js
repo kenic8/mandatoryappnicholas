@@ -6,45 +6,41 @@ import Products from "./Products";
 import AddProduct from "./AddProduct";
 import Login from "./Login";
 import Register from "./Register";
+
 const API_URL = process.env.REACT_APP_API;
 
-
-
 function App() {
-//token
+  //token
 
-function setToken(token) {
-  console.log(token + "hej");
-  localStorage.setItem("token", token);
-}
+  function setToken(token) {
+    localStorage.setItem("token", token);
+  }
 
-function getToken() {
-  return localStorage.getItem("token");
-}
+  function getToken() {
+    return localStorage.getItem("token").toString()
+  }
 
-function logout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-}
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  }
 
+  //currentuser
 
-//currentuser
+  function setUser(user) {
+    //locale storage user functions
+    console.log(user + "hej");
+    localStorage.setItem("user", user);
+  }
 
-function setUser(user) {
-  console.log(user + "hej");
-  localStorage.setItem("token", user);
-}
+  function getUser() {
+    return localStorage.getItem("token");
+  }
 
-function getUser() {
-  return localStorage.getItem("token");
-}
-
-
-
-  ///counter 
-const [postCount,setPostCount] = useState(0);
+  ///counter
+  const [postCount, setPostCount] = useState(0);
   const [data, setData] = useState([]);
- 
+
   async function getData() {
     const url = `${API_URL}/products`;
     const response = await fetch(url);
@@ -52,43 +48,37 @@ const [postCount,setPostCount] = useState(0);
     setData(data);
   }
 
-
   useEffect(() => {
-    console.log("getting data")
+    console.log("getting data");
     getData();
   }, [postCount]);
 
+  function addProduct (title, description, link) {
+    const owner =  localStorage.getItem("token")?localStorage.getItem("token"):"null";
+    const data = {
+      title: title,
+      description: description,
+      link: link,
+      owner:owner
+    };
 
-  function addProduct(title, description, link) {
-  
-    
-      const data = {
-        title: title,
-        description: description,
-        link: link,
-      };
-
-      const postData = async () => {
-        ///need new route
-        const url = `${API_URL}/products`;
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-       // const dataNew = await response.json();
-        setPostCount(postCount+1);
-      };
-      postData();
-    
+    const postData = async () => {
+      ///need new route
+      const url = `${API_URL}/products`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      // const dataNew = await response.json();
+      setPostCount(postCount + 1);
+    };
+    postData();
   }
 
-
   function addUser(email, password, name) {
-  
-    
     const data = {
       email: email,
       password: password,
@@ -106,58 +96,40 @@ const [postCount,setPostCount] = useState(0);
         body: JSON.stringify(data),
       });
       console.log(response);
-     // const dataNew = await response.json();
+      // const dataNew = await response.json();
       //setPostCount(postCount+1);
     };
     ///Do somthing wih it
-    // Redirect to users wishlist 
+    // Redirect to users wishlist
     postData();
-  
-}
+  }
 
+  function loginUser(email, password) {
+    const data = {
+      email: email,
+      password: password,
+    };
 
+    const postData = async () => {
+      ///need new route
+      const url = `${API_URL}/user`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json().then((response) => {
+        console.log(response.token + "response");
+        setToken(response.token.toString());
+        //Current user
+       // setUser(response.user);
+      });
+    };
 
-function loginUser(email, password) {
-  
-    
-  const data = {
-    email: email,
-    password: password,
-  };
-
-
-  const postData = async () => {
-    ///need new route
-    const url = `${API_URL}/user`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    
-    });
-    const res = await response.json().then(response => {
-      console.log(response.token)
-      setToken(response.token)
-      //Current user
-      setUser(response.user)
-    
-    });
-    
-    }
-     //const newToken =  response.header("logintoken")
-     // setToken(newToken)
-     postData();
-  };
-  
-  
-
-
-
-
-
-
+    postData();
+  }
 
 
   function addComment(content, _id) {
@@ -171,20 +143,22 @@ function loginUser(email, password) {
       _id: _id,
       commentId: _id + idExtend,
     };
+    const token =  localStorage.getItem("token");
     const postData = async () => {
+     
       ///need new route
       const url = `${API_URL}/products/${_id}`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": token
         },
         body: JSON.stringify(datacomments),
       });
       //const dataNew = await response.json();
-      setPostCount(postCount+1);
-      console.log(response)
-  
+      setPostCount(postCount + 1);
+      console.log(response);
     };
     postData();
   }
@@ -207,7 +181,7 @@ function loginUser(email, password) {
       });
 
       const dataLike = await response.json();
-      setPostCount(postCount+1);
+      setPostCount(postCount + 1);
     };
     postData();
   }
@@ -216,14 +190,13 @@ function loginUser(email, password) {
     return data.find((product) => product._id.toString() === _id);
   };
 
-
   return (
     <>
       <Router>
         <Products path="/" data={data} addProduct={addProduct}></Products>
-        <Login path="/login" loginUser={loginUser} ></Login>
+        <Login path="/login" loginUser={loginUser}></Login>
         <Register path="/Register" addUser={addUser}></Register>
-        
+
         <AddProduct path="/AddProduct" addProduct={addProduct}></AddProduct>
         <Product
           path="/Product/:_id"

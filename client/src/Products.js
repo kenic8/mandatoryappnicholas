@@ -13,6 +13,7 @@ function Products(props) {
   return (
     <>
       <h1>WishList</h1>
+      
       <Link to="/AddProduct">
         <button className="btn-go-back">Add to wishList</button>
       </Link>

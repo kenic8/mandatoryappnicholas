@@ -1,37 +1,54 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import User from "../models/user.js";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 const userRoutes = express.Router();
 
 //get all users
 userRoutes.post("/", async (req, res) => {
-  //Find user in users 
-  console.log(req.body.email)
+  //Find user in users
+  console.log(req.body.email);
+  let email = req.body.email;
+  let password = req.body.password;
+
+  /// inf not entered
+  if (!email || !password) {
+    let msg = "Username or password missing!";
+    console.error(msg);
+    res.status(401).json({ msg: msg });
+    return;
+  }
+
   const user = await User.findOne({ email: req.body.email });
+  console.log(user);
+
+  ///if not in in DB
   if (!user) {
     return res.status(404).send("Email does not exist");
-    //passwordcheck
-  // if (bcrypt.compareSync(password, user.hash)) {
-  //   const payload = { username: username };
-   //   const token = jwt.sign(payload, secret, { algorithm: 'HS512', expiresIn: '1h' });
+  }
+  //passwordcheck
+  if (bcrypt.compareSync(password, user.password)) {
+    const token = jwt.sign(
+      {
+        _id: user._id,
+      },
+      process.env.TOKEN_S
+    );
+    res.json({
+      user: user,
+      token: token.toString(),
+    });
+  } else {
+    let msg = "Username or password is wrong!";
+    console.error(msg);
+    res.status(401).json({ msg: msg });
+    return;
   }
   ///JWT
-  const token = jwt.sign(
-    {
-      _id: user._id,
-    },
-    process.env.TOKEN_S
-  );
-  res.json({
-    user: user,
-    token: token.toString(),
-  });
+
   //res.json(user);
 });
-
-
 
 ///post to users create user
 userRoutes.post("/register", async (req, res) => {
@@ -41,7 +58,6 @@ userRoutes.post("/register", async (req, res) => {
   const hashpswrd = await bcrypt.hash(req.body.password, salt);
 
   try {
-  
     const user = new User({
       name: req.body.name,
       email: req.body.email,

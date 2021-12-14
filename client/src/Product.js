@@ -5,7 +5,6 @@ import { Link } from "@reach/router";
 function Product(props) {
   const { _id, getProduct } = props;
   const product = getProduct(_id);
-  console.log(product);
   // Conditional rendering
   if (product === undefined) {
     return <p>Nothing here</p>;
