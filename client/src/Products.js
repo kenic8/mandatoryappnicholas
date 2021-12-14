@@ -4,6 +4,7 @@ import AddProduct from "./AddProduct";
 
 function Products(props) {
   let Products = props.data;
+  const { logout, remove } = props;
 
   console.log(props.currentuser);
   console.log(props.owner);
@@ -23,7 +24,15 @@ function Products(props) {
         <h1>Wishlist</h1>
       )}
       {props.currentuser ? (
-        <button className="btn-go-back">Log Out</button>
+        <button
+          className="btn-go-back"
+          onClick={(e) => {
+            e.preventDefault();
+            logout();
+          }}
+        >
+          Log Out
+        </button>
       ) : (
         <Link to="/login">
           <button className="btn-go-back">login</button>
@@ -44,6 +53,14 @@ function Products(props) {
             <h3>{product.date}</h3>
             <h4>CommentCount</h4>
             <h3>{product.comments.length}</h3>
+            {props.owner === props.currentuser ? (
+              <button  onClick={(e) => {
+                e.preventDefault();
+                remove(product._id);
+              }}> Remove</button>
+            ) : (
+              <div></div>
+            )}
             <Link key={index} to={`/Product/${product._id}`}>
               <button className="btn-go">Go Wish</button>
             </Link>

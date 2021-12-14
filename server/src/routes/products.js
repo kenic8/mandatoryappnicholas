@@ -83,5 +83,19 @@ productRoutes.post("/like/:id", async (req, res) => {
   }
 });
 
+productRoutes.post("/remove/:id", async (req, res) => {
+  let doc = Product.findByIdAndDelete(req.body._id, function (err) {
+    try {
+      res.status(200).json(doc);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "There was a Server Side Error!", detail: err });
+    }
+  });
+
+});
+
+
 
 export default productRoutes;

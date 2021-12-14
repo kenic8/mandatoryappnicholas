@@ -12,34 +12,34 @@ const API_URL = process.env.REACT_APP_API;
 function App() {
   //token
 
-  function setTokens(token,user) {
+  function setTokens(token, user) {
     //storage
     localStorage.setItem("token", token);
     localStorage.setItem("user", user);
     //state
-    setCurrentuser(user)
+    setCurrentuser(user);
   }
 
   function getToken() {
-    return localStorage.getItem("token").toString()
+    return localStorage.getItem("token").toString();
   }
 
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    setCurrentuser(null);
   }
 
   //currentuser
 
-  
   ///vars
   const [postCount, setPostCount] = useState(0);
   const [data, setData] = useState([]);
-  const [currentuser,setCurrentuser] = useState(localStorage.getItem("user"));
+  const [currentuser, setCurrentuser] = useState(localStorage.getItem("user"));
   //sample owner
   // set to id of owner
-  const owner = "61b85e14ffef7bb3306c0bba"
-  console.log(currentuser)
+  const owner = "61b85e14ffef7bb3306c0bba";
+  console.log(currentuser);
   async function getData() {
     const url = `${API_URL}/products`;
     const response = await fetch(url);
@@ -52,13 +52,15 @@ function App() {
     getData();
   }, [postCount]);
 
-  function addProduct (title, description, link) {
-    const owner =  localStorage.getItem("token")?localStorage.getItem("token"):"null";
+  function addProduct(title, description, link) {
+    const owner = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : "null";
     const data = {
       title: title,
       description: description,
       link: link,
-      owner:owner
+      owner: owner,
     };
 
     const postData = async () => {
@@ -76,10 +78,6 @@ function App() {
     };
     postData();
   }
-
-
-
-
 
   function addUser(email, password, name) {
     const data = {
@@ -125,8 +123,8 @@ function App() {
       });
       const res = await response.json().then((response) => {
         console.log(response.token + "response");
-        console.log(response.user._id)
-        setTokens(response.token,response.user._id)
+        console.log(response.user._id);
+        setTokens(response.token, response.user._id);
         setPostCount(postCount + 1);
         //Current user
       });
@@ -134,7 +132,6 @@ function App() {
 
     postData();
   }
-
 
   function addComment(content, _id) {
     let today = new Date();
@@ -147,16 +144,15 @@ function App() {
       _id: _id,
       commentId: _id + idExtend,
     };
-    const token =  localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     const postData = async () => {
-     
       ///need new route
       const url = `${API_URL}/products/${_id}`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token
+          Authorization: token,
         },
         body: JSON.stringify(datacomments),
       });
@@ -190,6 +186,29 @@ function App() {
     postData();
   }
 
+  function remove(_id) {
+    console.log(_id);
+    const data = {
+      _id: _id,
+    };
+    const postData = async () => {
+      ///need new route
+      const url = `${API_URL}/products/remove/${_id}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const res = await response.json();
+      console.log(res)
+      setPostCount(postCount + 1);
+    };
+    postData();
+  }
+
   const GetProduct = (_id) => {
     return data.find((product) => product._id.toString() === _id);
   };
@@ -197,7 +216,15 @@ function App() {
   return (
     <>
       <Router>
-        <Products path="/" data={data} addProduct={addProduct} currentuser={currentuser} owner={owner}></Products>
+        <Products
+          path="/"
+          data={data}
+          addProduct={addProduct}
+          currentuser={currentuser}
+          owner={owner}
+          logout={logout}
+          remove={remove}
+        ></Products>
         <Login path="/login" loginUser={loginUser}></Login>
         <Register path="/Register" addUser={addUser}></Register>
 
