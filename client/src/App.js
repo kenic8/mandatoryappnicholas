@@ -12,8 +12,12 @@ const API_URL = process.env.REACT_APP_API;
 function App() {
   //token
 
-  function setToken(token) {
+  function setTokens(token,user) {
+    //storage
     localStorage.setItem("token", token);
+    localStorage.setItem("user", user);
+    //state
+    setCurrentuser(user)
   }
 
   function getToken() {
@@ -27,20 +31,15 @@ function App() {
 
   //currentuser
 
-  function setUser(user) {
-    //locale storage user functions
-    console.log(user + "hej");
-    localStorage.setItem("user", user);
-  }
-
-  function getUser() {
-    return localStorage.getItem("token");
-  }
-
-  ///counter
+  
+  ///vars
   const [postCount, setPostCount] = useState(0);
   const [data, setData] = useState([]);
-
+  const [currentuser,setCurrentuser] = useState(localStorage.getItem("user"));
+  //sample owner
+  // set to id of owner
+  const owner = "61b85e14ffef7bb3306c0bba"
+  console.log(currentuser)
   async function getData() {
     const url = `${API_URL}/products`;
     const response = await fetch(url);
@@ -77,6 +76,10 @@ function App() {
     };
     postData();
   }
+
+
+
+
 
   function addUser(email, password, name) {
     const data = {
@@ -122,9 +125,10 @@ function App() {
       });
       const res = await response.json().then((response) => {
         console.log(response.token + "response");
-        setToken(response.token.toString());
+        console.log(response.user._id)
+        setTokens(response.token,response.user._id)
+        setPostCount(postCount + 1);
         //Current user
-       // setUser(response.user);
       });
     };
 
@@ -193,7 +197,7 @@ function App() {
   return (
     <>
       <Router>
-        <Products path="/" data={data} addProduct={addProduct}></Products>
+        <Products path="/" data={data} addProduct={addProduct} currentuser={currentuser} owner={owner}></Products>
         <Login path="/login" loginUser={loginUser}></Login>
         <Register path="/Register" addUser={addUser}></Register>
 

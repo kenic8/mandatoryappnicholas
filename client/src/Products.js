@@ -5,25 +5,32 @@ import AddProduct from "./AddProduct";
 function Products(props) {
   let Products = props.data;
 
- // console.log(Products);
+  console.log(props.currentuser);
+  console.log(props.owner);
 
-
-
+  // console.log(Products);
 
   return (
     <>
-      <h1>WishList</h1>
-      
-      <Link to="/AddProduct">
-        <button className="btn-go-back">Add to wishList</button>
-      </Link>
-
-      <Link to="/login">
-        <button className="btn-go-back">login</button>
-      </Link>
+      {props.owner === props.currentuser ? (
+        <div>
+          <h1>Your wishlist</h1>
+          <Link to="/AddProduct">
+            <button className="btn-go-back">Add to wishList</button>
+          </Link>
+        </div>
+      ) : (
+        <h1>Wishlist</h1>
+      )}
+      {props.currentuser ? (
+        <button className="btn-go-back">Log Out</button>
+      ) : (
+        <Link to="/login">
+          <button className="btn-go-back">login</button>
+        </Link>
+      )}
 
       {Products.map((product, index) => (
-
         <div className="comment-wrap">
           <div className="comment-wrap-inner-2" key={index}>
             <Link key={index} to={`/Product/${product._id}`}>
@@ -42,9 +49,7 @@ function Products(props) {
             </Link>
           </div>
         </div>
-        
-      )
-      )}
+      ))}
     </>
   );
 }

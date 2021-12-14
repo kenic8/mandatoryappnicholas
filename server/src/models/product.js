@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
+  
   title: {
     type: String,
     required: true,
@@ -10,10 +11,6 @@ const productSchema = new mongoose.Schema({
   },
   link: {
     type: String,
-  },
-  ///jwt auth user id key for lookup
-  creatorKey:{
-    type:String
   },
   date: { type: Date, default: Date.now },
   description: {
@@ -35,6 +32,8 @@ const productSchema = new mongoose.Schema({
     },
   ],
 });
+
+
 
 const Product = mongoose.model("Products", productSchema);
 

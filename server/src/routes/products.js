@@ -59,7 +59,7 @@ const token = req.headers.authorization
 
   } catch (error) {
     res.status(500);
-    res.json({ error: "Login to comment on post", details: error.toString() });
+    res.json({ error: "login to comment", details: error.toString() });
     console.log(error);
   }
 });
