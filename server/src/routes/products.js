@@ -83,6 +83,31 @@ productRoutes.post("/like/:id", async (req, res) => {
   }
 });
 
+
+
+productRoutes.post("/edit/:id", async (req, res) => {
+  try {
+    console.log("inpost");
+    const filter = { _id: req.body._id };
+    const update = {
+      title: req.body.title,
+      link: req.body.link,
+      description: req.body.description,
+    };
+    let doc = await Product.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    //const products =  await Product.find({}).sort({date: 'desc'});
+    res.json(doc);
+  } catch (error) {
+    res.status(500);
+    res.json({ error: "Something went wrong", details: error.toString() });
+    console.log(error);
+  }
+});
+
+
+
 productRoutes.post("/remove/:id", async (req, res) => {
   let doc = Product.findByIdAndDelete(req.body._id, function (err) {
     try {

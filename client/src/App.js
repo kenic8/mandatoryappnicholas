@@ -6,6 +6,7 @@ import Products from "./Products";
 import AddProduct from "./AddProduct";
 import Login from "./Login";
 import Register from "./Register";
+import EditProduct from "./EditProduct";
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -78,6 +79,34 @@ function App() {
     };
     postData();
   }
+
+
+  function editProduct(title, description, link,_id) {
+
+    const data = {
+      title: title,
+      description: description,
+      link: link,
+      _id:_id
+   
+    };
+
+    const postData = async () => {
+      ///need new route
+      const url = `${API_URL}/products/edit/${_id}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      // const dataNew = await response.json();
+      setPostCount(postCount + 1);
+    };
+    postData();
+  }
+
 
   function addUser(email, password, name) {
     const data = {
@@ -224,11 +253,13 @@ function App() {
           owner={owner}
           logout={logout}
           remove={remove}
+          editProduct={editProduct}
         ></Products>
         <Login path="/login" loginUser={loginUser}></Login>
         <Register path="/Register" addUser={addUser}></Register>
 
         <AddProduct path="/AddProduct" addProduct={addProduct}></AddProduct>
+         <EditProduct path="/EditProduct/:_id" editProduct={editProduct}></EditProduct>
         <Product
           path="/Product/:_id"
           getProduct={GetProduct}

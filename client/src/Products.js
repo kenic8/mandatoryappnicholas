@@ -54,10 +54,16 @@ function Products(props) {
             <h4>CommentCount</h4>
             <h3>{product.comments.length}</h3>
             {props.owner === props.currentuser ? (
-              <button  onClick={(e) => {
+              <div>
+                <button  onClick={(e) => {
                 e.preventDefault();
                 remove(product._id);
-              }}> Remove</button>
+              }}>Remove</button>
+             <Link to={`/EditProduct/${product._id}`}>
+              <button className="btn-go">Edit</button>
+            </Link>
+              </div>
+              
             ) : (
               <div></div>
             )}
