@@ -41,9 +41,9 @@ function Register(props) {
       </button>
       </form>
 
-      {/* <Link to="/">
+      <Link to="/">
         <button className="btn-go-back">go to wishList</button>
-      </Link> */}
+      </Link>
     </>
   );
 }

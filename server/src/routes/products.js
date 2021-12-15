@@ -5,7 +5,8 @@ import Validation from "./validation.js"
 const productRoutes = express.Router();
 
 productRoutes.get("/", async (req, res) => {
-  const products =  await Product.find({}).sort({date: 'desc'});
+  //sort by likes
+  const products =  await Product.find({}).sort({likes: 'desc'});
   res.json(products);
 
 });
@@ -83,6 +84,23 @@ productRoutes.post("/like/:id", async (req, res) => {
   }
 });
 
+productRoutes.post("/received/:id", async (req, res) => {
+  try {
+    console.log("inpost");
+    const filter = { _id: req.body._id };
+    const update = { received: req.body.received };
+    let doc = await Product.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    //const products =  await Product.find({}).sort({date: 'desc'});
+    res.json(doc);
+  } catch (error) {
+    res.status(500);
+    res.json({ error: "Something went wrong", details: error.toString() });
+    console.log(error);
+  }
+});
+
 
 
 productRoutes.post("/edit/:id", async (req, res) => {
@@ -109,13 +127,14 @@ productRoutes.post("/edit/:id", async (req, res) => {
 
 
 productRoutes.post("/remove/:id", async (req, res) => {
-  let doc = Product.findByIdAndDelete(req.body._id, function (err) {
+  let doc = Product.findByIdAndDelete(req.body._id, function (err,docs) {
     try {
-      res.status(200).json(doc);
+      res.status(200).json(docs);
+      console.log(err)
     } catch (error) {
       res
         .status(500)
-        .json({ error: "There was a Server Side Error!", detail: err });
+        .json({ error: "There was a Server Side Error!", detail: error });
     }
   });
 

@@ -7,6 +7,7 @@ import AddProduct from "./AddProduct";
 import Login from "./Login";
 import Register from "./Register";
 import EditProduct from "./EditProduct";
+import { navigate } from "@reach/router"
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -21,9 +22,9 @@ function App() {
     setCurrentuser(user);
   }
 
-  function getToken() {
-    return localStorage.getItem("token").toString();
-  }
+  // function getToken() {
+  //   return localStorage.getItem("token").toString();
+  // }
 
   function logout() {
     localStorage.removeItem("token");
@@ -76,19 +77,19 @@ function App() {
       });
       // const dataNew = await response.json();
       setPostCount(postCount + 1);
+      if (response.ok) {
+        navigate(`/`);
+      }
     };
     postData();
   }
 
-
-  function editProduct(title, description, link,_id) {
-
+  function editProduct(title, description, link, _id) {
     const data = {
       title: title,
       description: description,
       link: link,
-      _id:_id
-   
+      _id: _id,
     };
 
     const postData = async () => {
@@ -103,10 +104,12 @@ function App() {
       });
       // const dataNew = await response.json();
       setPostCount(postCount + 1);
+      if (response.ok) {
+        navigate(`/`);
+      }
     };
     postData();
   }
-
 
   function addUser(email, password, name) {
     const data = {
@@ -128,6 +131,9 @@ function App() {
       console.log(response);
       // const dataNew = await response.json();
       //setPostCount(postCount+1);
+      if (response.ok) {
+        navigate(`/login`);
+      }
     };
     ///Do somthing wih it
     // Redirect to users wishlist
@@ -150,13 +156,19 @@ function App() {
         },
         body: JSON.stringify(data),
       });
+      if (!response.ok) {
+        alert("Wrong email or password");
+      }
       const res = await response.json().then((response) => {
         console.log(response.token + "response");
         console.log(response.user._id);
         setTokens(response.token, response.user._id);
         setPostCount(postCount + 1);
-        //Current user
       });
+
+      if (response.ok) {
+        navigate(`/`);
+      }
     };
 
     postData();
@@ -187,6 +199,9 @@ function App() {
       });
       //const dataNew = await response.json();
       setPostCount(postCount + 1);
+      if (!response.ok) {
+        alert("login to comment");
+      }
       console.log(response);
     };
     postData();
@@ -215,6 +230,29 @@ function App() {
     postData();
   }
 
+  function Received(received, _id) {
+    console.log(received);
+    const data = {
+      received: received,
+      _id: _id,
+    };
+    const postData = async () => {
+      ///need new route
+      const url = `${API_URL}/products/received/${_id}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const dataReceived = await response.json();
+      setPostCount(postCount + 1);
+    };
+    postData();
+  }
+
   function remove(_id) {
     console.log(_id);
     const data = {
@@ -232,7 +270,7 @@ function App() {
       });
 
       const res = await response.json();
-      console.log(res)
+      console.log(res);
       setPostCount(postCount + 1);
     };
     postData();
@@ -254,17 +292,21 @@ function App() {
           logout={logout}
           remove={remove}
           editProduct={editProduct}
+          Received={Received}
+          addLike={addLike}
         ></Products>
         <Login path="/login" loginUser={loginUser}></Login>
         <Register path="/Register" addUser={addUser}></Register>
 
         <AddProduct path="/AddProduct" addProduct={addProduct}></AddProduct>
-         <EditProduct path="/EditProduct/:_id" editProduct={editProduct}></EditProduct>
+        <EditProduct
+          path="/EditProduct/:_id"
+          editProduct={editProduct}
+        ></EditProduct>
         <Product
           path="/Product/:_id"
           getProduct={GetProduct}
           addComment={addComment}
-          addLike={addLike}
         ></Product>
       </Router>
     </>

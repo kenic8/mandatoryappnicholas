@@ -9,7 +9,6 @@ function AddLike(props) {
   let parsed = parseInt(props.likes);
   return (
     <>
-      <label>Click me to like - </label>
 
       <div class="flex-container-likes">
         <div>
