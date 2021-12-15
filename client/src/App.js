@@ -8,6 +8,7 @@ import Login from "./Login";
 import Register from "./Register";
 import EditProduct from "./EditProduct";
 import { navigate } from "@reach/router"
+import Navigation from "./Navigation";
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -295,6 +296,7 @@ function App() {
           Received={Received}
           addLike={addLike}
         ></Products>
+
         <Login path="/login" loginUser={loginUser}></Login>
         <Register path="/Register" addUser={addUser}></Register>
 
@@ -307,6 +309,9 @@ function App() {
           path="/Product/:_id"
           getProduct={GetProduct}
           addComment={addComment}
+          currentuser={currentuser}
+          owner={owner}
+          logout={logout}
         ></Product>
       </Router>
     </>

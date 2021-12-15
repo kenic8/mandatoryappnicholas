@@ -5,18 +5,31 @@ margin-left: 1%;
 overflow-x: hidden;
 }
 
+button{
+  font-size:90%;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  color: whitesmoke;
+  text-shadow:0px -1px 0px #5b6178;
+  height: 5vh;
+  width: 100px;
+  background-color:#1c87c9;
+}
+
 h2{
-    inline-size: 40%;
+    inline-size: 40%; 
     overflow-wrap: break-word;
 }
 
 .comment-wrap{
-    width: 800px;
+  margin-left: 2%;
+    width: 100%;
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
   
-    justify-content:center;
+    justify-content:space-around;
     align-items: center;
     margin-bottom: 5%;
     border-left-style: solid;
@@ -26,47 +39,55 @@ h2{
 
 
   .comment-wrap > .comment-wrap-inner-2{
-   
     width: 100%;
+    height: 200px;
     margin: 1%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.comment-wrap > .comment-wrap-inner-2 > div{
+ display: flex;
+justify-content: flex-start;
+flex-wrap: wrap;
+flex-direction: column;
+padding: 2%;
+align-items: center;
+height: 250px;
+width: 200px;
+
+}
+
+
+
+.comment-wrap > .comment-wrap-inner-2 > button{
+  width: 20%;
 }
 
 .comment-wrap > .comment-wrap-inner-2 > h3{
   font-size: 1em;
   max-width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
 } 
-
 
 .btn-go {
 	box-shadow: 0px 1px 0px 0px #f0f7fa;
 	background-color:#1c87c9;
 	border:1px solid #057fd0;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px -1px 0px #5b6178;
+
 }
 
-
+#description{
+ overflow: hidden;
+text-overflow: ellipsis;
+overflow-wrap: break-word;
+width: 200px;
+}
 
 .btn-go-back {
 	box-shadow: 0px 1px 0px 0px #f0f7fa;
 	background-color:#c92d1c;
 	border:1px solid #d01305;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px -1px 0px #5b6178;
+
 }
 
 .btn-go:hover {
@@ -74,7 +95,7 @@ h2{
 	background-color:#019ad2;
 }
 
-.btn-go-back:hover {
+ .btn-go-back:hover {
 	background:linear-gradient(to bottom, #d20101 5%, #ef3933 100%);
 	background-color:#d22001;
 }
@@ -120,16 +141,16 @@ form {
                     margin-top: 2%;
                     display: flex;
                     flex-wrap: nowrap;
-                    width:20%;
+                    width:100%;
                     align-items: center;
-                    justify-content: flex-start;
+                    justify-content: space-around;
                   }
                   
                   .flex-container-likes > div {
                      padding: 0;
                     transition: transform 2s; /* Animation */
                   
-                    width: 20%;
+                    width: 100%;
                     margin-right: 0%;
                     text-align: center;
                     font-size: 1.5em;
@@ -138,10 +159,68 @@ form {
                 
                   
                   .flex-container-likes > div > img {
-                width: 50%;
+                width: 100%;
+                max-width: 35px;
               
                   }
 
                   .flex-container-likes > div > img:hover{
                     transform: scale(1.5);
                   }
+
+
+
+                  
+.nav-main {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  background-color: rgb(233, 231, 228);
+  padding:6px 24px;
+  flex-wrap: wrap;
+}
+
+.nav-main>div {
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  margin-right: 1% ;
+}
+
+.nav-main>div>button {
+background-color:#c92d1c;
+border:1px solid #d01305;
+
+}
+
+#link-wishlist{
+
+background-color:#0d4309;
+font-size:70%;
+font-weight:bold;
+padding:6px 24px;
+text-decoration:none;
+color: whitesmoke;
+text-shadow:0px -1px 0px #5b6178;
+width: 100px;
+
+}
+
+#login{
+  box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background-color:#1c87c9;
+	
+}
+
+
+
+.nav-main-inner1{
+  font-size: 22px;
+  border-right:1px solid black ;
+
+}
+
+.nav-main-inner1 > h1{
+padding-right:15px ;
+
+}

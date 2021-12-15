@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
   },
 
   likes: { type: String, default: "0" },
-  received: { type: Boolean },
+  received: { type: Boolean,default:false },
 
   comments: [
     {

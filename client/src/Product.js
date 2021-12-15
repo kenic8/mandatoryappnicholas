@@ -1,9 +1,10 @@
 import AddComment from "./AddComment";
 import AddLike from "./AddLike";
 import { Link } from "@reach/router";
+import Navigation from "./Navigation";
 
 function Product(props) {
-  const { _id, getProduct } = props;
+  const { _id, getProduct,logout } = props;
   const product = getProduct(_id);
   // Conditional rendering
   if (product === undefined) {
@@ -11,17 +12,9 @@ function Product(props) {
   } else
     return (
       <>
+       <Navigation currentuser={props.currentuser} logout={logout}></Navigation>
         <h1>All i want is {product.title}</h1>
-        {/* <h2>By: {product.author}</h2> */}
-        <Link to="/">
-          <button className="btn-go-back">go to wishList</button>
-        </Link>
-        <h2> About: {product.description}</h2>
-        <AddLike
-          _id={_id}
-          addLike={props.addLike}
-          likes={product.likes}
-        ></AddLike>
+        <h2> Description: {product.description}</h2>
         <hr></hr>
         <AddComment addComment={props.addComment} _id={_id}></AddComment>
         <h1>comments </h1>
