@@ -1,7 +1,6 @@
 import express from "express";
-import Product from "../models/Product.js";
+import Product from "../models/product.js";
 import jwt from "jsonwebtoken";
-import Validation from "./validation.js"
 const productRoutes = express.Router();
 
 productRoutes.get("/", async (req, res) => {
