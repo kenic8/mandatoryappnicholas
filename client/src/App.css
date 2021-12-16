@@ -24,17 +24,13 @@ h2{
 
 .comment-wrap{
   margin-left: 2%;
-    width: 100%;
+    width: 80%;
     height: fit-content;
-    display: flex;
     flex-wrap: wrap;
-  
     justify-content:space-around;
     align-items: center;
     margin-bottom: 5%;
-    border-left-style: solid;
-    border-width: 5px;
-    border-color: #057fd0;
+
   }
 
 
@@ -42,9 +38,6 @@ h2{
     width: 100%;
     height: 200px;
     margin: 1%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
 }
 .comment-wrap > .comment-wrap-inner-2 > div{
  display: flex;
@@ -68,6 +61,62 @@ width: 200px;
   font-size: 1em;
   max-width: 100%;
 } 
+
+
+
+
+
+.main-wrap{
+  margin-left: 2%;
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+  
+    justify-content:space-around;
+    align-items: center;
+    margin-bottom: 5%;
+    border-left-style: solid;
+    border-width: 5px;
+    border-color: #057fd0;
+  }
+
+
+  .main-wrap > .main-wrap-inner{
+    width: 100%;
+    height: 200px;
+    margin: 1%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.main-wrap > .main-wrap-inner > div{
+ display: flex;
+justify-content: flex-start;
+flex-wrap: wrap;
+flex-direction: column;
+padding: 2%;
+align-items: center;
+height: 250px;
+width: 200px;
+
+}
+
+
+
+.main-wrap > .main-wrap-inner> button{
+  width: 20%;
+}
+
+.main-wrap > .main-wrap-inner> h3{
+  font-size: 1em;
+  max-width: 100%;
+} 
+
+
+
+
+
 
 .btn-go {
 	box-shadow: 0px 1px 0px 0px #f0f7fa;

@@ -29,9 +29,9 @@ function Products(props) {
       )}
 
       {Products.map((product, index) => (
-        <div className="comment-wrap" id="Cm-wrap">
+        <div className="main-wrap" id="Cm-wrap">
           {product.received ? (
-            <div className="comment-wrap-inner-2" key={index}>
+            <div className="main-wrap-inner" key={index}>
               <div>
                 <h4> Wish Name</h4>
                 <Link key={index} to={`/Product/${product._id}`}>
@@ -86,7 +86,7 @@ function Products(props) {
               </div>
             </div>
           ) : (
-            <div className="comment-wrap-inner-2" key={index}>
+            <div className="main-wrap-inner" key={index}>
               <div>
                 <h4> Wish Name</h4>
                 <Link key={index} to={`/Product/${product._id}`}>

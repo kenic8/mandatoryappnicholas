@@ -15,10 +15,12 @@ const API_URL = process.env.REACT_APP_API;
 function App() {
   //token
 
-  function setTokens(token, user) {
+  function setTokens(token,user,name) {
+    console.log(name)
     //storage
     localStorage.setItem("token", token);
     localStorage.setItem("user", user);
+    localStorage.setItem("name", name);
     //state
     setCurrentuser(user);
   }
@@ -161,9 +163,9 @@ function App() {
         alert("Wrong email or password");
       }
       const res = await response.json().then((response) => {
-        console.log(response.token + "response");
-        console.log(response.user._id);
-        setTokens(response.token, response.user._id);
+        console.log(response.user.name);
+    
+        setTokens(response.token, response.user._id, response.user.name);
         setPostCount(postCount + 1);
       });
 
@@ -176,11 +178,13 @@ function App() {
   }
 
   function addComment(content, _id) {
+    const name = localStorage.getItem("name");
     let today = new Date();
     let idExtend = Date.now();
     let time =
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     const datacomments = {
+      name:name,
       content: content,
       time: time,
       _id: _id,

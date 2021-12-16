@@ -25,6 +25,9 @@ const productSchema = new mongoose.Schema({
 
   comments: [
     {
+      name:{
+        type:String
+      },
       time: {
         type: String,
       },

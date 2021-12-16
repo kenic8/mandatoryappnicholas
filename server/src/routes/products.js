@@ -38,7 +38,7 @@ const token = req.headers.authorization
   
   try {
     const verify = jwt.verify(token,process.env.TOKEN_S)
-    console.log(verify)
+    // console.log(verify)
 
     console.log("inpost");
     const filter = { _id: req.params.id };
@@ -48,6 +48,7 @@ const token = req.headers.authorization
           content: req.body.content,
           time: req.body.time,
           commentId: req.body.commentId,
+          name: req.body.name
         }
       },
     };
