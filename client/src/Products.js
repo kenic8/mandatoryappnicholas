@@ -72,7 +72,7 @@ function Products(props) {
                         }
                       }}
                     >
-                      Unreceived
+                      Cancel
                     </button>
                   </div>
                 </div>
