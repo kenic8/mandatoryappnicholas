@@ -17,13 +17,15 @@ button{
   background-color:#1c87c9;
 }
 
+
+
 h2{
     inline-size: 40%; 
     overflow-wrap: break-word;
 }
 
 .comment-wrap{
-  margin-left: 2%;
+  margin-left: 3%;
     width: 80%;
     height: fit-content;
     flex-wrap: wrap;
@@ -67,7 +69,7 @@ width: 200px;
 
 
 .main-wrap{
-  margin-left: 2%;
+  margin-left: 5%;
     width: 80%;
     height: fit-content;
     display: flex;
@@ -240,6 +242,13 @@ form {
 background-color:#c92d1c;
 border:1px solid #d01305;
 
+
+}
+
+
+.nav-main>div>button {
+	background:linear-gradient(to bottom, #d83725 5%, #df4a39 100%);
+	background-color:#e13320;
 }
 
 #link-wishlist{

@@ -72,7 +72,7 @@ function Products(props) {
                         }
                       }}
                     >
-                      unreceived
+                      Unreceived
                     </button>
                   </div>
                 </div>
@@ -143,7 +143,7 @@ function Products(props) {
                         }
                       }}
                     >
-                      received
+                      Received
                     </button>
                   </div>
                   <div>

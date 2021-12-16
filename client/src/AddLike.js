@@ -3,9 +3,7 @@ import like from "./img/like.png";
 import unlike from "./img/unlike.png";
 
 function AddLike(props) {
-  const [isliked, setisliked] = useState(false);
-  const [isunliked, setisunliked] = useState(false);
-  console.log(props);
+
   let parsed = parseInt(props.likes);
   return (
     <>
@@ -16,14 +14,9 @@ function AddLike(props) {
             src={like}
             alt="like"
             onClick={(e) => {
-              if (isliked !== true) {
+                e.preventDefault();
                 props.addLike(parsed + 1, props._id)
-                setisliked(true);
-                setisunliked(false);
-               
-              } else {
-                return;
-              }
+              
             }}
           />
         </div>
@@ -33,12 +26,11 @@ function AddLike(props) {
             alt="Unlike"
             src={unlike}
             onClick={(e) => {
-              if (isunliked !== true) {
-                props.addLike(parsed - 1, props._id);
-                setisunliked(true);
-                setisliked(false);
-              
-              } else {
+                e.preventDefault();
+                if(parsed !== 0 ){
+                  props.addLike(parsed - 1, props._id);
+                }
+               else {
                 return;
               }
             }}
