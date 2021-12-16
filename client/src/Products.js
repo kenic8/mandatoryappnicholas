@@ -106,7 +106,7 @@ function Products(props) {
               </div>
               <div>
                 <h4>Created</h4>
-                <h3>{product.date}</h3>
+                <h3>{product.date.substring(0, 10)}</h3>
               </div>
               <div>
                 <h4>CommentCount</h4>

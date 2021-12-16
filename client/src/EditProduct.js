@@ -15,7 +15,7 @@ function EditProduct(props) {
   // Conditional rendering
   return (
     <>
-      <h3>Add product to your wishlist</h3>
+      <h3>Edit the product</h3>
       <form className ="info">
         <label>Title</label>
         <input onChange={(event) => setTitle(event.target.value)} type="text" value={title} />
