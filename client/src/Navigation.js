@@ -12,7 +12,7 @@ function Navigation(props) {
 
         <div class="nav-main-inner2">
           {props.currentuser ? (
-            <button
+            <button  className="btn-go-back"
               onClick={(e) => {
                 e.preventDefault();
                 logout();
@@ -22,14 +22,14 @@ function Navigation(props) {
             </button>
           ) : (
             <Link to="/login">
-              <button id="login">login</button>
+              <button className="btn-go">login</button>
             </Link>
           )}
         </div>
 
         <div>
           <Link to="/">
-            <button id="link-wishlist">WISHLIST</button>
+            <button id="WishButton">WISHLIST</button>
           </Link>
         </div>
       </nav>

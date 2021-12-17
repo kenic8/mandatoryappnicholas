@@ -29,7 +29,7 @@ function AddProduct(props) {
         />
       
       <button
-      className="button-form"
+      className="btn-go"
         type="button"
         onClick={(e) => {
           addProduct(title, description,link);

@@ -29,7 +29,7 @@ function EditProduct(props) {
         />
       
       <button
-      className="button-form"
+       className="btn-go"
         type="button"
         onClick={(e) => {
           editProduct(title, description,link,props._id);

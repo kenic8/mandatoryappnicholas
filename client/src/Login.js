@@ -12,13 +12,12 @@ function Login(props) {
   };
 
 
-
   // Conditional rendering
   return (
     <>
     <h1> TIME TO LOGIN</h1>
     <Link to="/Register">
-        <button className="btn-go-back">Sign up</button>
+        <button className="btn-go">Sign up</button>
       </Link>
 
       <form className ="info">
@@ -29,7 +28,7 @@ function Login(props) {
 
       
       <button
-      className="button-form"
+     className="btn-go"
         type="button"
         onClick={(e) => {
           loginUser(email, password);

@@ -22,7 +22,7 @@ function AddComment(props) {
         />
       
       <button
-       className="button-form"
+      className="btn-go"
         type="button"
         onClick={(e) => {
           e.preventDefault();

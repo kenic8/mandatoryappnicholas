@@ -97,7 +97,7 @@ function Products(props) {
                 <h4>Link</h4>
                 <a target="_blank" rel="noopener noreferrer" href={product.link}>
                   {" "}
-                  <h3>{product.link}</h3>
+                  <h3  id="link">{product.link}</h3>
                 </a>
               </div>
               <div>
